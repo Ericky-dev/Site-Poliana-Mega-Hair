@@ -1,0 +1,82 @@
+.service-card {
+  background: var(--surface-color);
+  border-radius: var(--radius);
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.service-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.service-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.service-description {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.service-details {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: var(--background-color);
+  border-radius: var(--radius-sm);
+}
+
+.service-duration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 12px;
+}
+
+.service-pricing {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.service-price {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.service-deposit {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.service-btn {
+  width: 100%;
+  margin-top: auto;
+}
+
+.service-btn svg {
+  transition: var(--transition);
+}
+
+.service-btn:hover svg {
+  transform: translateX(4px);
+}
