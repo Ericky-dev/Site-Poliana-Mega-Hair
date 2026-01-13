@@ -19,7 +19,7 @@ function Header() {
       <div className="header-container">
         <Link to="/" className="logo">
           <span className="logo-icon">🌸</span>
-          <span className="logo-text">Poliana MegaHair</span>
+          <span className="logo-text">Poliana Mega-Hair</span>
         </Link>
 
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
