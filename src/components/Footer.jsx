@@ -21,9 +21,9 @@ function Footer() {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-section">
-          <h3 className="footer-title">Poliana MegaHair</h3>
+          <h3 className="footer-title">Poliana Mega-Hair</h3>
           <p className="footer-slogan">
-            <em>Não é só beleza, é transformação.</em>
+            <em>Não é só BELEZA, é TRANSFORMAÇÃO.</em>
           </p>
           <p className="footer-cta">
             Agende seu horário online!
@@ -73,8 +73,8 @@ function Footer() {
       </div>
 
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} Poliana MegaHair. Todos os direitos reservados.</p>
-        <p className="footer-signature">Desenvolvida por Gustavo, não é o Augusto</p>
+        <p>&copy; {new Date().getFullYear()} Poliana Mega-Hair. Todos os direitos reservados.</p>
+        <p className="footer-signature">Desenvolvida por Gustavo</p>
       </div>
     </footer>
   );
