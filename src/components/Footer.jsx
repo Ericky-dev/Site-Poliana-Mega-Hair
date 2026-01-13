@@ -57,7 +57,7 @@ function Footer() {
               <FaWhatsapp /> <a href="https://wa.me/5511999999999">(11) 99999-9999</a>
             </li>
             <li>
-              <FaMapMarkerAlt /> São Paulo, SP
+              <FaMapMarkerAlt /> Recife -PE
             </li>
           </ul>
         </div>
