@@ -30,7 +30,7 @@ function Home() {
         <div className="hero-content">
           <h1 className="hero-title">Poliana Mega-Hair</h1>
           <p className="hero-subtitle hero-slogan">
-            Não é só BELEZA, é TRANSFORMÇÃO
+            Não é só BELEZA, é TRANSFORMAÇÃO
           </p>
           <p className="hero-subtitle">
             Agende online de forma rápida e prática!
