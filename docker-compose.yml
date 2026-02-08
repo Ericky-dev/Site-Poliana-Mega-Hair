@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  mariadb:
+    image: mariadb:10.11
+    container_name: beauty-salon-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: ${DB_NAME:-beauty_salon}
+      MYSQL_USER: ${DB_USER:-beauty_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-beauty_pass}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - beauty-network
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: beauty-salon-backend
+    restart: unless-stopped
+    ports:
+      - "5001:5000"
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      DB_HOST: mariadb
+      DB_PORT: 3306
+      DB_USER: ${DB_USER:-beauty_user}
+      DB_PASSWORD: ${DB_PASSWORD:-beauty_pass}
+      DB_NAME: ${DB_NAME:-beauty_salon}
+      JWT_SECRET: ${JWT_SECRET:-your_jwt_secret_here}
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN}
+      TWILIO_WHATSAPP_FROM: ${TWILIO_WHATSAPP_FROM}
+      SALON_OWNER_PHONE: ${SALON_OWNER_PHONE}
+      PIX_KEY: ${PIX_KEY}
+      PIX_RECEIVER_NAME: ${PIX_RECEIVER_NAME:-Beauty Salon}
+      PIX_CITY: ${PIX_CITY:-Sao Paulo}
+      FACEBOOK_APP_ID: ${FACEBOOK_APP_ID}
+      FACEBOOK_APP_SECRET: ${FACEBOOK_APP_SECRET}
+      INSTAGRAM_ACCESS_TOKEN: ${INSTAGRAM_ACCESS_TOKEN}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3002}
+      BACKEND_URL: ${BACKEND_URL:-http://localhost:5001}
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    networks:
+      - beauty-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: beauty-salon-frontend
+    restart: unless-stopped
+    ports:
+      - "3002:80"
+    environment:
+      REACT_APP_API_URL: ${BACKEND_URL:-http://localhost:5001}
+      REACT_APP_FACEBOOK_APP_ID: ${FACEBOOK_APP_ID}
+    depends_on:
+      - backend
+    networks:
+      - beauty-network
+
+volumes:
+  mariadb_data:
+
+networks:
+  beauty-network:
+    driver: bridge
